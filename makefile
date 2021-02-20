@@ -1,5 +1,6 @@
-start:
-	gcc -Wall -Werror Chessviz.cpp
-	a.exe
+chess:
+	gcc -Wall -Werror -o chess Chessviz.cpp
+runChess:
+	chess.exe
 
 	
