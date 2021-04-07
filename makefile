@@ -1,18 +1,28 @@
 CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -I src -MP -MMD
 
-src\ChessDv\ChessDv:  obj\src\ChessDv\ChessDvHelper.o obj\src\ChessDv\ChessDv.o obj\src\ChessDv\Start.o
+.PHONY:	all
+
+all:	bin\ChessDv.exe Run clean
+
+bin\ChessDv.exe:  obj\src\ChessDv\ChessDv.o obj\src\libChessDv\libChessDvHelper.a
 	g++ $(CFLAGS) -o $@ $^
 
 obj\src\ChessDv\ChessDv.o: src\ChessDv\ChessDv.cpp
 	g++ -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
+obj\src\libChessDv\libChessDvHelper.a: obj\src\ChessDv\ChessDvHelper.o
+	ar rcs $@ $^
+
 obj\src\ChessDv\ChessDvHelper.o: src\libChessDv\ChessDvHelper.cpp
 	g++ -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-obj\src\ChessDv\Start.o:
-	src\ChessDv\ChessDv.exe
+Run:
+	bin\ChessDv.exe
 
 -include obj\src\ChessDv\ChessDv.d obj\src\ChessDv\ChessDvHelper.d
+
+clean:
+	rm -f bin\ChessDv.exe obj\src\ChessDv\ChessDvHelper.o obj\src\ChessDv\ChessDv.o
 
 
