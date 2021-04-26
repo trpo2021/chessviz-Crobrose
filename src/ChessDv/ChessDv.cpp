@@ -74,6 +74,10 @@ int main()
 		system("cls");
 		Sborka_Tabl(Desk);
 		cin >> t >> y;
+		if (t==y)
+		{
+			break;
+		}
 		pus1 = t[1];
 		pus2 = y[1];
 		o = pus1 - '0';
