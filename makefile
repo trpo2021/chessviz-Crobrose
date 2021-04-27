@@ -23,10 +23,6 @@ Run:
 -include obj/src/ChessDv/ChessDv.d obj/src/ChessDv/ChessDvHelper.d
 
 clean:
-	del obj\src\ChessDv\ChessDvHelper.o 
-	del obj\src\ChessDv\ChessDvHelper.d 
-	del obj\src\ChessDv\ChessDv.o 
-	del obj\src\ChessDv\ChessDv.d
-	del obj\src\libChessDv\libChessDvHelper.a
+	rm -f obj/src/ChessDv/ChessDvHelper.o obj/src/libChessDv/libChessDvHelper.a obj/src/ChessDv/ChessDv.o obj/src/ChessDv/ChessDvHelper.d obj/src/ChessDv/ChessDv.d
 
 
