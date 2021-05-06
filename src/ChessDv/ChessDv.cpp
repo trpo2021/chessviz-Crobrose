@@ -4,13 +4,12 @@
 #include <string>
 #include "libChessDv/ChessDvHelper.h"
 
-char Desk[9][9];
-
 using namespace std;
 
 int main()
 {
 	int i, j;
+	char Desk[9][9];
 	Desk[0][8] = '8';
 	Desk[1][1] = 'r';
 	Desk[1][2] = 'n';
@@ -70,7 +69,7 @@ int main()
 	{
 		int o = 0, p = 0, d = 0, f = 0;
 		string t, y, k, l;
-		char pus, pus1, pus2;
+		char pus1, pus2;
 		system("cls");
 		Sborka_Tabl(Desk);
 		cin >> t >> y;
@@ -150,6 +149,7 @@ int main()
 		{
 			f = 8;
 		}
+		char pus;
 		pus = Desk[d][o];
 		Desk[d][o] = Desk[f][p];
 		Desk[f][p] = pus;
