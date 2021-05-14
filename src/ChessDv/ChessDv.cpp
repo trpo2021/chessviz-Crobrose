@@ -6,6 +6,17 @@
 
 using namespace std;
 
+void Swap(int d, int o, int f, int p, char Desk[9][9]){
+	char pus;
+	pus = Desk[d][o];
+	Desk[d][o] = Desk[f][p];
+	Desk[f][p] = pus;
+	[[maybe_unused]] char dio = '0';
+	dio = Desk[d][o];
+	[[maybe_unused]] char pio = '0';
+	pio = Desk[f][p];
+}
+
 int main()
 {
 	int i, j;
@@ -149,10 +160,7 @@ int main()
 		{
 			f = 8;
 		}
-		char pus;
-		pus = Desk[d][o];
-		Desk[d][o] = Desk[f][p];
-		Desk[f][p] = pus;
+		Swap(d, o, f, p, Desk);
 	}
 	return 0;
 }

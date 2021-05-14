@@ -22,7 +22,7 @@ obj/src/ChessDv/ChessDvHelper.o: src/libChessDv/ChessDvHelper.cpp
 	g++ -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
 Run:
-	bin/ChessDv.exe
+	./bin/ChessDv.exe
 
 -include obj/src/ChessDv/ChessDv.d obj/src/ChessDv/ChessDvHelper.d
 
