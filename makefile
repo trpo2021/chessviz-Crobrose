@@ -1,5 +1,5 @@
-APP_NAME = chessDv
-LIB_NAME = libchessDv
+APP_NAME = ChessDv
+LIB_NAME = libChessDv
 TEST_NAME = ctest_chess
 
 CC = g++
