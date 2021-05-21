@@ -1,0 +1,13 @@
+/Chess
+
+/obj/src/ArtVs
+
+/obj/src/Debug
+
+/obj/src/ChessDv/*.o
+
+/obj/src/ChessDv/*.d
+
+/obj/src/libChessDv/*.a
+
+/bin/ChessDv.exe
