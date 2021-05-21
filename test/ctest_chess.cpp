@@ -9,11 +9,6 @@
 
 using namespace std;
 
-CTEST_SKIP(const, test_skip)
-{
-    ASSERT_FAIL();
-}
-
 CTEST(Run_Figur, Run_Peshek)
 {
     // Given
