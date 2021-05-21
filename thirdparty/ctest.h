@@ -26,14 +26,14 @@ union ctest_run_func_union {
     ctest_unary_run_func unary;
 };
 
-#define CTEST_IMPL_PRAGMA(x) _Pragma(#x)
+#define CTEST_IMPL_PRAGMA(x)_Pragma(#x)
 
 #if defined(__GNUC__)
 #if defined(__clang__) || __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
 /* the GCC argument will work for both gcc and clang  */
-#define CTEST_IMPL_DIAG_PUSH_IGNORED(w)    \
-    CTEST_IMPL_PRAGMA(GCC diagnostic push) \
-    CTEST_IMPL_PRAGMA(GCC diagnostic ignored "-W" #w)
+#define CTEST_IMPL_DIAG_PUSH_IGNORED(w)	\
+	CTEST_IMPL_PRAGMA(GCC diagnostic push)	\
+	CTEST_IMPL_PRAGMA(GCC diagnostic ignored "-W" #w)
 #define CTEST_IMPL_DIAG_POP() CTEST_IMPL_PRAGMA(GCC diagnostic pop)
 #else
 /* the push/pop functionality wasn't in gcc until 4.6, fallback to "ignored"  */
@@ -380,8 +380,6 @@ void CTEST_LOG(const char* fmt, ...)
 
     msg_end();
 }
-
-CTEST_IMPL_DIAG_PUSH_IGNORED(missing - noreturn)
 
 void CTEST_ERR(const char* fmt, ...)
 {
