@@ -1,18 +1,17 @@
 #define CTEST_CHESS
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
 #include "ctest.h"
 #include <ChessDv.cpp>
 #include <ChessDvHelper.h>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
 
 using namespace std;
 
-
 int main1(int argc, const char** argv)
 {
-	cout << "falied";
+    cout << "falied";
     return main1(argc, argv);
 }
 
@@ -23,16 +22,16 @@ CTEST_SKIP(const, test_skip)
 
 CTEST(Run_Figur, Run_Peshek)
 {
-	// Given
-	char dio = '0';
-	char pio = '0';
-	const int o = 2;
-    const int p = 2;   
+    // Given
+    char dio = '0';
+    char pio = '0';
+    const int o = 2;
+    const int p = 2;
     const int d = 2;
-    const int f = 3;    
+    const int f = 3;
     // When
     main();
-    Swap(d,o,f,p);
+    Swap(d, o, f, p);
     main();
     const char* result1 = dio + "0";
     const char* result2 = pio + "0";
