@@ -11,7 +11,7 @@ using namespace std;
 
 CTEST(Run_Figur, Run_Peshek)
 {
-    // Given
+    // Given1
     char dio = '0';
     char pio = '0';
     const int o = 2;
