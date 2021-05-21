@@ -9,12 +9,6 @@
 
 using namespace std;
 
-int main1(int argc, const char** argv)
-{
-    cout << "falied";
-    return main1(argc, argv);
-}
-
 CTEST_SKIP(const, test_skip)
 {
     ASSERT_FAIL();
