@@ -1,6 +1,5 @@
 #define CTEST_CHESS
 #include "ctest.h"
-#include <ChessDv.cpp>
 #include <ChessDvHelper.h>
 #include <iostream>
 #include <stdio.h>
