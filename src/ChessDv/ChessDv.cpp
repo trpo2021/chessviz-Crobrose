@@ -1,5 +1,5 @@
 #include "libChessDv/ChessDvHelper.h"
-#include "libchessDv/sborkaPust1.h"
+#include "libChessDv/sborkaPust1.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
