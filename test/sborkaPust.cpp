@@ -1,5 +1,5 @@
 #include <ctest.h>
-#include <libchessDv/sborkaPust1.h>
+#include <libChessDv/sborkaPust1.h>
 #include <stdlib.h>
 
 CTEST(ChessPust1, ChessPust2)
