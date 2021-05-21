@@ -1,4 +1,5 @@
 #include "libChessDv/ChessDvHelper.h"
+#include "libchessDv/sborkaPust1.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,6 +23,7 @@ int main()
 {
     int i, j;
     char Desk[9][9];
+    sborkaPust(Desk);
     Desk[0][8] = '8';
     Desk[1][1] = 'r';
     Desk[1][2] = 'n';
