@@ -1,43 +1,62 @@
+APP_NAME = chessDv
+LIB_NAME = libchessDv
+TEST_NAME = ctest_chess
+
+CC = g++
 CFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -I src -MP -MMD
-CCFLAGS= -Wall -Wextra -Wconversion -Wredundant-decls -Wshadow -Wno-unused-parameter -O3
-CC=clang
-CXX=clang++
-CXXFLAGS = -I thirdparty -I test -I src/ChessDv -I src/libChessDv
+CPPFLAGS = -I src -I thirdparty -MP -MMD
+LDFLAGS =
+LDLIBS =
 
-.PHONY:	all
+BIN_DIR = bin
+OBJ_DIR = obj
+SRC_DIR = src
+TEST_DIR = test
+THIRD_DIR = thirdparty
 
-all:	bin/ChessDv.exe 
+APP_PATH = $(BIN_DIR)/$(APP_NAME)
+LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
+TEST_PATH = $(BIN_DIR)/$(TEST_NAME)
+CTEST_PATH = $(THIRD_DIR)/ctest.h
 
-bin/ChessDv.exe:  obj/src/ChessDv/ChessDv.o obj/src/libChessDv/libChessDvHelper.a
-	g++ $(CFLAGS) -o $@ $^
+SRC_EXT = cpp
 
-obj/src/ChessDv/ChessDv.o: src/ChessDv/ChessDv.cpp
-	g++ -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
+APP_SOURCES = $(shell find $(SRC_DIR)/$(APP_NAME) -name '*.$(SRC_EXT)')
+APP_OBJECTS = $(APP_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
 
-obj/src/libChessDv/libChessDvHelper.a: obj/src/ChessDv/ChessDvHelper.o
-	ar rcs $@ $^
+LIB_SOURCES = $(shell find $(SRC_DIR)/$(LIB_NAME) -name '*.$(SRC_EXT)')
+LIB_OBJECTS = $(LIB_SOURCES:$(SRC_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(SRC_DIR)/%.o)
 
-obj/src/ChessDv/ChessDvHelper.o: src/libChessDv/ChessDvHelper.cpp
-	g++ -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
+TEST_SOURCES = $(shell find $(TEST_DIR) -name '*.$(SRC_EXT)')
+TEST_OBJECTS = $(TEST_SOURCES:$(TEST_DIR)/%.$(SRC_EXT)=$(OBJ_DIR)/$(TEST_DIR)/%.o)
 
-Run:
-	./bin/ChessDv.exe
+DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d) $(TEST_OBJECTS:.o=.d)
 
--include obj/src/ChessDv/ChessDv.d obj/src/ChessDv/ChessDvHelper.d
+.PHONY: all
 
-clean:
-	rm -f obj/src/ChessDv/ChessDvHelper.o obj/src/libChessDv/libChessDvHelper.a obj/src/ChessDv/ChessDv.o obj/src/ChessDv/ChessDvHelper.d obj/src/ChessDv/ChessDv.d obj/src/Test/ChessDv-Test.o obj/src/Test/ctest_chess.o
-
+all: $(APP_PATH)
 
 .PHONY: test
 
-test: ctest.h obj/src/Test/ctest_chess.o
-	g++ -lm obj/src/ChessDv/ChessDv.o obj/src/libChessDv/libChessDvHelper.a obj/src/Test/ctest_chess.o -o test
+test: $(TEST_PATH)
+	$(TEST_PATH)
 
-obj/src/Test/ctest_chess.o: test/ctest_chess.cpp ctest.h
-	g++ -c $(CFLAGS) $(CPPFLAGS) $(CXXFLAGS) -o $@ $<
+-include $(DEPS)
 
+$(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ $(LDFLAGS) $(LDLIBS)
 
-RunTest:
-	bin/ChessDv-Test.exe
+$(TEST_PATH): $(TEST_OBJECTS) $(LIB_PATH) $(CTEST_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(TEST_OBJECTS) $(LIB_PATH) -o $@ $(LDFLAGS) $(LDLIBS)
+
+$(LIB_PATH): $(LIB_OBJECTS)
+	ar rcs $@ $^
+
+$(OBJ_DIR)/%.o: %.cpp
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+
+.PHONY: clean
+clean:
+	$(RM) $(APP_PATH) $(LIB_PATH) $(TEST_PATH)
+	find $(OBJ_DIR) -name '*.o' -exec $(RM) '{}' \;
+	find $(OBJ_DIR) -name '*.d' -exec $(RM) '{}' \;
